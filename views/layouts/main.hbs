@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="Торты, торты на заказ, торты ручной работы, кондитер, медовик, наполеон, чизкейк">
+  <meta name="description" content={{title}}>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  {{> styles}}
+</head>
+<body class="kurale-regular">
+  {{> header}}
+
+  <main>
+    {{{body}}}
+    <div id="notifications" style="position: fixed; top: 20px; right: 20px; z-index: 1000;"></div>
+  </main>
+
+  {{> footer}}
+  {{> scripts}}
+</body>
+</html>

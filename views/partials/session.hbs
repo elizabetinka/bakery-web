@@ -1,0 +1,6 @@
+{{#if user}}
+  <p>Вы вошли как {{user}}</p>
+  <a href="/?auth=false" class="session_exit_a">Выйти</a>
+{{else}}
+  <a href="/?auth=true" class="session_exit_a">Войти</a>
+{{/if}}

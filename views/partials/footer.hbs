@@ -1,0 +1,15 @@
+<footer class="footer">
+  <div class="footer_stat">
+    <p>© 2024 Все права защищены.</p>
+    <div id="load-stats"></div>
+    <p>Server Time: {{serverTime}} ms</p>
+    <p>Client Time: <span id="clientTime"></span> ms</p>
+    <script>
+      const start = performance.now();
+      window.onload = () => {
+        const end = performance.now();
+        document.getElementById('clientTime').textContent = (end - start).toFixed(2);
+      };
+    </script>
+  </div>
+</footer>

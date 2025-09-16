@@ -1,0 +1,228 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Pastry {
+  id: Int!
+  name: String!
+  description: String!
+  price: Float!
+  isAvailable: Boolean!
+  image: String!
+}
+
+type Cake {
+  id: Int!
+  name: String!
+  description: String!
+  price: Float!
+  isAvailable: Boolean!
+  image: String!
+}
+
+type User {
+  id: Float!
+  name: String!
+  email: String!
+  password: String!
+  role: Role!
+  orders(paginationRequestDto: PaginationRequestDto!): [Order!]
+}
+
+"""Роли пользователей в системе"""
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+input PaginationRequestDto {
+  page: Int! = 1
+  limit: Int! = 10
+}
+
+type Order {
+  id: Int!
+  customer: User!
+  items(paginationRequestDto: PaginationRequestDto!): [OrderItem!]
+  status: OrderStatus!
+  totalPrice: Float!
+}
+
+"""Статус заказа"""
+enum OrderStatus {
+  NEW
+  IN_PROGRESS
+  COMPLETED
+  CANCELED
+}
+
+type OrderItem {
+  id: Int!
+  order: Order!
+  cake: Cake
+  pastry: Pastry
+  quantity: Int!
+  itemPrice: Float!
+}
+
+type Photo {
+  id: Int!
+  name: String!
+  image: String!
+}
+
+type PaginationMetaDto {
+  totalItems: Int!
+  currentPage: Int!
+  itemsPerPage: Int!
+}
+
+type PaginationResponceDtoPhoto {
+  data: [Photo!]!
+  meta: PaginationMetaDto!
+  total: Int!
+  links: String!
+}
+
+type PaginationResponceDtoCake {
+  data: [Cake!]!
+  meta: PaginationMetaDto!
+  total: Int!
+  links: String!
+}
+
+type PaginationResponceDtoPastry {
+  data: [Pastry!]!
+  meta: PaginationMetaDto!
+  total: Int!
+  links: String!
+}
+
+type PaginationResponceDtoUser {
+  data: [User!]!
+  meta: PaginationMetaDto!
+  total: Int!
+  links: String!
+}
+
+type PaginationResponceDtoOrder {
+  data: [Order!]!
+  meta: PaginationMetaDto!
+  total: Int!
+  links: String!
+}
+
+type PaginationResponceDtoOrderItem {
+  data: [OrderItem!]!
+  meta: PaginationMetaDto!
+  total: Int!
+  links: String!
+}
+
+type Query {
+  user_find_all(paginationRequestDto: PaginationRequestDto!): PaginationResponceDtoUser!
+  user_find_one(id: Int!): User!
+  order_find_all(paginationRequestDto: PaginationRequestDto!): PaginationResponceDtoOrder!
+  order_find_one(id: Int!): Order!
+  cake_find_all(paginationRequestDto: PaginationRequestDto!): PaginationResponceDtoCake!
+  cake_find_one(id: Int!): Cake!
+  pastry_find_all(paginationRequestDto: PaginationRequestDto!): PaginationResponceDtoPastry!
+  pastry_find_one(id: Int!): Pastry!
+  order_item_find_all(paginationRequestDto: PaginationRequestDto!): PaginationResponceDtoOrderItem!
+  order_item_find_one(id: Int!): OrderItem!
+  photo_find_all(paginationRequestDto: PaginationRequestDto!): PaginationResponceDtoPhoto!
+  photo_find_one(id: Int!): Photo!
+}
+
+type Mutation {
+  createUsers(createUserDto: CreateUserDto!): User!
+  updateUsers(id: Int!, updateUserDto: UpdateUserDto!): User!
+  removeUsers(id: Int!): Boolean!
+  createOrders(createOrderDto: CreateOrderDto!): Order!
+  updateOrder(id: Int!, updateOrderItemDto: UpdateOrderItemDto!): OrderItem!
+  removeOrder(id: Int!): Boolean!
+  createCakes(createCakeDto: CreateCakeDto!): Cake!
+  updateCakes(id: Int!, updateCakeDto: UpdateCakeDto!): Cake!
+  removeCakes(id: Int!): Boolean!
+  createPastry(createPastryDto: CreatePastryDto!): Pastry!
+  updatePastry(id: Int!, updatePastryDto: UpdatePastryDto!): Pastry!
+  removePastry(id: Int!): Boolean!
+  createOrderItems(createOrderItemDto: CreateOrderItemDto!): OrderItem!
+  createPhotos(createPhotoDto: CreatePhotoDto!): Photo!
+  updatePhotos(id: Int!, updatePhotoDto: UpdatePhotoDto!): Photo!
+  removePhotos(id: Int!): Boolean!
+}
+
+input CreateUserDto {
+  name: String!
+  email: String!
+  password: String!
+  role: Role! = CUSTOMER
+}
+
+input UpdateUserDto {
+  name: String!
+  email: String!
+  password: String!
+  role: Role! = CUSTOMER
+}
+
+input CreateOrderDto {
+  customer: Float!
+}
+
+input UpdateOrderItemDto {
+  orderId: Int!
+  cakeId: Int!
+  patsyId: Int!
+  quantity: Int! = 1
+}
+
+input CreateCakeDto {
+  name: String!
+  description: String!
+  image: String!
+  price: Float!
+  isAvailable: Boolean!
+}
+
+input UpdateCakeDto {
+  name: String!
+  description: String!
+  image: String!
+  price: Float!
+  isAvailable: Boolean!
+}
+
+input CreatePastryDto {
+  name: String!
+  description: String!
+  image: String!
+  price: Float!
+  isAvailable: Boolean!
+}
+
+input UpdatePastryDto {
+  name: String!
+  description: String!
+  image: String!
+  price: Float!
+  isAvailable: Boolean!
+}
+
+input CreateOrderItemDto {
+  orderId: Int!
+  cakeId: Int!
+  patsyId: Int!
+  quantity: Int! = 1
+}
+
+input CreatePhotoDto {
+  name: String! = ""
+  image: String!
+}
+
+input UpdatePhotoDto {
+  name: String! = ""
+  image: String!
+}

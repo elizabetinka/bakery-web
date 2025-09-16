@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="Торты, торты на заказ, торты ручной работы, кондитер, медовик, наполеон, чизкейк">
+    <meta name="description" content="Каталог пирожных">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >Конструктор заказов</title>
+    <link rel="stylesheet" href="../css/outlines.css">
+    <link rel="stylesheet" href="../css/other.css">
+    <link rel="icon" type="image/png" href="../img/cakes/logo2.png"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Kurale&display=swap" rel="stylesheet">
+    <script src="../js/loadStats.js" defer></script>
+    <script src="../js/active.js" defer></script>
+    <script src="../js/constructor.js" defer></script>
+</head>
+<body class="kurale-regular">
+    <header class="header">
+    
+        <div class="header_line">
+             <div class="header_line_logo">
+            <img src="../img/cakes/logo2.png" alt="Логотип" class="header_line_logo_img">
+        </div> 
+        <div class="menu header_line_menu">
+        <nav>
+            <ul class="menu_ul">
+                <li><a class="menu_a" href="../index.html">Торты</a></li>
+                <li><a class="menu_a" href="cake.html">Пирожные</a></li>
+                <li><a class="menu_a" href="photo.html">Фото работ</a></li>
+                <li><a class="menu_a" href="pay.html">Доставка и оплата</a></li>
+                <li><a class="menu_a" href="contacts.html">Контакты</a></li>
+                <li><a class="menu_a" href="order.html">Сделать заказ</a></li>
+            </ul>
+        </nav>
+        </div>
+    </div>
+        </div>
+    </header>
+
+
+    <main>
+        <section class="middleware middleware_position">
+
+        </div>
+        <h1 class="great-vibes-regular middleware_text">Конструктор заказа</h1>
+        </section>
+
+        <section class="info kurale-regular">
+            <div class="info_item">
+                <p>Это помощник для вас, если вы не знаете какие десерты выбрать на торжество. Наш конструктор вернет наиболее оптимальное и популярное решение, с которым вы не прогадаете </p>
+            </div>
+            <div class="info_item">
+            <form id="scheduleForm" class="form">
+                <div class="form_group">
+                    <label for="partyType">Тип торжества:</label>
+                    <select id="partyType" name="partyType" class="form_input">
+                        <option value="porp">Корпоратив</option>
+                        <option value="birt">День рождения</option>
+                        <option value="katering">Кейтеринг</option>
+                    </select>
+                </div>
+                <div class="form_group">
+                    <label for="maxNum">Количество человек:</label>
+                    <input type="number" id="maxNum" name="maxNum" class="form_input" min="1" max="500" value="10">
+                </div>
+        
+                <div class="form_group">
+                    <label for="money">Бюджет:</label>
+                    <select id="money" name="money" class="form_input">
+                        <option value="low">Дешевый</option>
+                        <option value="middle">Средний</option>
+                        <option value="high">Большой</option>
+                    </select>
+                </div>
+                <div class="form_group">
+                    <label for="language">Язык:</label>
+                    <select id="language" name="language" class="form_input">
+                        <option value="ru">Русский</option>
+                        <option value="en">Английский</option>
+                    </select>
+                </div>
+                <div class="form_actions">
+                    <button type="submit" class="form_button">Создать</button>
+                </div>
+            </form>
+        </div>
+    
+            <div id="tableContainer" class="table_container"></div>
+            </section>
+
+        <div class="description description_position">
+            <blockquote class="description_blockquote great-vibes-regular"><b>Формула вашего счастья:</b> мука + крем <sup>2</sup> + начинка <sup>3</sup></blockquote>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer_stat">
+        <p>© 2024 Все права защищены.</p>
+        <div id="load-stats"></div> 
+        </div>
+    </footer>
+</body>
+</html>

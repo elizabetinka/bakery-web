@@ -1,0 +1,53 @@
+<section class="middleware middleware_position">
+  <div class="middleware_circle">
+
+  </div>
+  <h1 class="great-vibes-regular middleware_text">Добавление продукта</h1>
+</section>
+
+<div class="preloader" id="preloader">
+  <p>Загрузка...</p>
+</div>
+
+<div id="error-message" class="error-message"></div>
+
+<div class="form-body2">
+<div class="form-body">
+<form id="cakeForm">
+        <div class="form-group">
+            <label class="form_label" for="name">Название торта*:</label>
+            <input class="form-input" type="text" id="name" name="name" required>
+            <div id="nameError" class="error"></div>
+        </div>
+
+        <div class="form-group">
+            <label class="form_label" for="description">Описание:</label>
+            <textarea id="description" name="description" rows="3"></textarea>
+        </div>
+
+<!--        <div class="form-group">-->
+<!--            <label class="form_label" for="image">Ссылка на изображение:</label>-->
+<!--            <input class="form-input" type="text" id="image" name="image">-->
+<!--        </div>-->
+
+        <div class="form-group">
+          <label class="form_label" for="image">файл с изображением:</label>
+          <input class="form-input" type="file" id="fileInput" name="file">
+        </div>
+
+
+  <div class="form-group">
+            <label class="form_label" for="price">Цена (руб)*:</label>
+            <input class="form-input" type="number" id="price" name="price" min="0" step="0.01" required>
+            <div id="priceError" class="error"></div>
+        </div>
+
+        <div class="form-group checkbox-group">
+            <input class="form-input"  type="checkbox" id="isAvailable" name="isAvailable" checked>
+            <label class="form_label" for="isAvailable">Доступен для заказа</label>
+        </div>
+
+        <button class="add-button" type="submit">Добавить торт</button>
+</form>
+</div>
+</div>

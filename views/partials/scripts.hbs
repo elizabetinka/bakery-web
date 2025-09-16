@@ -1,0 +1,42 @@
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+<script src="/js/loadStats.js" defer></script>
+<script src="/js/active.js" defer></script>
+<script src="/js/finder.js"></script>
+<script src="/js/event_handler.js"></script>
+
+{{#each scripts}}
+  {{#if (eq this 'cakes_loader')}}
+    <script src="/js/pagination.js"></script>
+    <script src="/js/cakes_handler.js"></script>
+  {{/if}}
+  {{#if (eq this 'pasty_loader')}}
+    <script src="/js/pagination.js" defer></script>
+    <script src="/js/pasty_handler.js" defer></script>
+  {{/if}}
+  {{#if (eq this 'photo_loader')}}
+    <script src="/js/pagination.js" defer></script>
+    <script src="/js/photo_handler.js" defer></script>
+  {{/if}}
+  {{#if (eq this 'cake_item_loader')}}
+    <script src="/js/details_handler.js" defer></script>
+    <script src="/js/cake_details_handler.js" defer></script>
+  {{/if}}
+  {{#if (eq this 'pastry_item_loader')}}
+    <script src="/js/details_handler.js" defer></script>
+    <script src="/js/pasty_details_handler.js" defer></script>
+  {{/if}}
+  {{#if (eq this 'photo_item_loader')}}
+    <script src="/js/details_handler.js" defer></script>
+    <script src="/js/photo_details_handler.js" defer></script>
+  {{/if}}
+
+  {{#if (eq this 'add_handler')}}
+    <script src="/js/add_handler.js" defer></script>
+  {{/if}}
+
+  {{#if (eq this 'edit_handler')}}
+    <script src="/js/edit_handler.js" defer></script>
+  {{/if}}
+
+
+{{/each}}
