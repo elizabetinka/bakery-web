@@ -21,8 +21,8 @@
         <p>Сладкие моменты — особенные моменты!</p>
       </div>
       <div class="about_bottom_buttons">
-      <button class="edit-btn">Изменить</button>
-      <button class="delete-btn">Удалить</button>
+      <button class="edit-btn" {{#if user}}{{else}}disabled{{/if}}>Изменить</button>
+      <button class="delete-btn" {{#if user}}{{else}}disabled{{/if}}>Удалить</button>
     </div>
     </div>
   </div>

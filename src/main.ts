@@ -5,11 +5,7 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { engine } from 'express-handlebars';
 import { join } from 'path';
-import { seedCakes } from './infrastructure/database/seeds/cakes.seed';
 import { DataSource } from 'typeorm';
-import { seedPastry } from './infrastructure/database/seeds/pasty.seed';
-import { seedUsers } from './infrastructure/database/seeds/users.seed';
-import { seedPhotos } from './infrastructure/database/seeds/photos.seed';
 import { ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -33,17 +29,11 @@ async function bootstrap() {
     }),
   );
   app.setViewEngine('hbs');
-  //
-  // const dataSource = app.get(DataSource);
-  // await seedCakes(dataSource);
-  // await seedUsers(dataSource);
-  // await seedPastry(dataSource);
-  // await seedPhotos(dataSource);
 
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true, // Удаляет поля, не описанные в DTO
-      transform: true, // Автоматическое преобразование типов
+      // whitelist: true, // Удаляет поля, не описанные в DTO
+      // transform: true, // Автоматическое преобразование типов
       disableErrorMessages: false, // Показывать ошибки валидации
       transformOptions: {
         enableImplicitConversion: true, // <<< разрешить авто-приведение типов

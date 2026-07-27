@@ -2,12 +2,13 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
-import { ApiBody, ApiOperation, ApiParam, ApiQuery, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ApiDefaultErrorResponses } from '../decorator/swagger-default-responses.decorator';
 import { Order } from './entities/order.entity';
 import { PaginationResponceDtoOrder } from '../pagination-responce.dto';
 import { PaginationRequestDto } from '../pagination-request.dto';
 
+@ApiTags('Orders')
 @Controller('orders')
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
@@ -17,6 +18,7 @@ export class OrdersController {
   @ApiResponse({
     status: 201,
     description: 'Заказ создан',
+    type: () => Order,
   })
   @ApiDefaultErrorResponses()
   @ApiBody({
@@ -24,21 +26,17 @@ export class OrdersController {
     type: () => CreateOrderDto,
   })
   async create(@Body() createOrderDto: CreateOrderDto) {
-    await this.ordersService.create(createOrderDto);
+    return await this.ordersService.create(createOrderDto);
   }
 
   @ApiOperation({ summary: 'Получение заказов' })
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Торты получены',
     type: () => PaginationResponceDtoOrder,
   })
   @ApiDefaultErrorResponses()
-  @ApiQuery({
-    example: { page: 1, limit: 50 },
-    description: 'Пагинационный запрос',
-    type: () => PaginationRequestDto,
-  })
+  @Get()
   async findAll(@Query() paginationDto: PaginationRequestDto) {
     console.log(paginationDto);
     const { data, links, totalPages } =
@@ -57,7 +55,7 @@ export class OrdersController {
 
   @ApiOperation({ summary: 'Получение заказа' })
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Заказ получен',
     type: () => Order,
   })
@@ -69,7 +67,6 @@ export class OrdersController {
   })
   @ApiDefaultErrorResponses()
   @Get(':id')
-  @Get(':id')
   async findOne(@Param('id') id: string) {
     return await this.ordersService.findOne(+id);
   }
@@ -77,8 +74,9 @@ export class OrdersController {
 
   @ApiOperation({ summary: 'Редиктирование заказа' })
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Заказ отредактирован',
+    type: () => Order,
   })
   @ApiDefaultErrorResponses()
   @ApiBody({
@@ -93,12 +91,12 @@ export class OrdersController {
   })
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
-    await this.ordersService.update(+id, updateOrderDto);
+    return await this.ordersService.update(+id, updateOrderDto);
   }
 
   @ApiOperation({ summary: 'Удаление заказа' })
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Заказ удален',
   })
   @ApiDefaultErrorResponses()

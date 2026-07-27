@@ -17,6 +17,7 @@ import { PaginationRequestDto } from '../pagination-request.dto';
 import { ApiBody, ApiOperation, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ApiDefaultErrorResponses } from '../decorator/swagger-default-responses.decorator';
 import { PaginationResponceDtoPhoto } from '../pagination-responce.dto';
+import { Photo } from './entities/photo.entity';
 
 @ApiTags('photos')
 @Controller('api/photos')
@@ -29,6 +30,7 @@ export class PhotosApiController {
   @ApiResponse({
     status: 201,
     description: 'Фото создан',
+    type: () => Photo,
   })
   @ApiDefaultErrorResponses()
   @ApiBody({
@@ -37,7 +39,7 @@ export class PhotosApiController {
   })
   @Post()
   async create(@Body() createPhotoDto: CreatePhotoDto) {
-    await this.photosService.create(createPhotoDto);
+    return await this.photosService.create(createPhotoDto);
   }
 
   @Get()
@@ -50,11 +52,6 @@ export class PhotosApiController {
     type: () => PaginationResponceDtoPhoto,
   })
   @ApiDefaultErrorResponses()
-  @ApiQuery({
-    example: { page: 1, limit: 50 },
-    description: 'Пагинационный запрос',
-    type: () => PaginationRequestDto,
-  })
   async findAll(@Query() paginationDto: PaginationRequestDto) {
     const { data, links, totalPages } =
       await this.photosService.findAll(paginationDto);
@@ -91,7 +88,7 @@ export class PhotosApiController {
     @Param('id') id: string,
     @Body() updatePhotoDto: UpdatePhotoDto,
   ) {
-    await this.photosService.update(+id, updatePhotoDto);
+    return await this.photosService.update(+id, updatePhotoDto);
   }
 
   @ApiOperation({ summary: 'Удаление фото' })

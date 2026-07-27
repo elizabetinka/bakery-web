@@ -44,7 +44,13 @@ export class OrdersService {
 
   async findOne(id: number) {
     if (id) {
-      return await this.orderRepository.findOneBy({ id });
+      return await this.orderRepository.findOne({
+        where: { id },
+        relations: {
+          customer: true,
+          items: true,
+        },
+      });
     }
   }
 
@@ -54,6 +60,10 @@ export class OrdersService {
       where: { customer: { id: userId } },
       skip: (page - 1) * limit,
       take: limit,
+      relations: {
+          customer: true,
+          items: true,
+        },
     });
     return { items: items, total: totalItems };
   }
@@ -63,6 +73,10 @@ export class OrdersService {
     const [data, total] = await this.orderRepository.findAndCount({
       skip: (page - 1) * limit,
       take: limit,
+      relations: {
+          customer: true,
+          items: true,
+        },
     });
 
     const totalPages = Math.ceil(total / limit);

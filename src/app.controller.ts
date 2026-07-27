@@ -3,14 +3,16 @@ import { AppService } from './app.service';
 import { CacheControl } from './decorator/cache-control.decorator';
 import { CacheKey, CacheTTL } from '@nestjs/cache-manager';
 import { ETagInterceptor } from './interceptors/etag.interceptor';
+import { AuthStateService } from './auth/auth-state.service';
 
 
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
-  isLoggedIn = false;
+  constructor(
+    private readonly appService: AppService,
+    private readonly authStateService: AuthStateService,
+  ) {}
 
   @CacheControl(5)
   @CacheKey('cakes')
@@ -19,10 +21,10 @@ export class AppController {
   @Get()
   @Render('pages/index')
   getIndexPage(@Query('auth') auth: string) {
-    this.isLoggedIn = this.isLoggedIn || auth === 'true';
+    this.authStateService.setAuth(auth);
     return {
       title: 'Каталог тортов',
-      user: this.isLoggedIn ? 'Лиза' : null,
+      user: this.authStateService.getUser(),
       scripts: ['cakes_loader'],
     };
   }
@@ -30,10 +32,9 @@ export class AppController {
   @Get('pastry')
   @Render('pages/cake')
   getCake() {
-    console.log("Getting index page 2");
     return {
       title: 'Каталог пирожных',
-      user: this.isLoggedIn ? 'Лиза' : null,
+      user: this.authStateService.getUser(),
       scripts: ['pasty_loader'],
     };
   }
@@ -41,10 +42,9 @@ export class AppController {
   @Get('photo')
   @Render('pages/photo')
   getPhoto() {
-    console.log("Getting index page 3");
     return {
       title: 'Фото работ',
-      user: this.isLoggedIn ? 'Лиза' : null,
+      user: this.authStateService.getUser(),
       scripts: ['photo_loader'],
     };
   }
@@ -52,30 +52,28 @@ export class AppController {
   @Get('pay')
   @Render('pages/pay')
   getPay() {
-    console.log("Getting index page 4");
     return {
       title: 'Доставка и оплата',
-      user: this.isLoggedIn ? 'Лиза' : null,
+      user: this.authStateService.getUser(),
     };
   }
 
   @Get('contacts')
   @Render('pages/contacts')
   getContacts() {
-    console.log("Getting index page 5");
     return {
       title: 'Контактыт',
-      user: this.isLoggedIn ? 'Лиза' : null,
+      user: this.authStateService.getUser(),
     };
   }
 
   @Get('order')
   @Render('pages/order')
   getOrder() {
-    console.log("Getting index page 6");
     return {
       title:'Конструктор заказов',
-      user: this.isLoggedIn ? 'Лиза' : null,
+      user: this.authStateService.getUser(),
+      scripts: ['constructor_loader'],
     };
   }
 

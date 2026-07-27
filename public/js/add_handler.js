@@ -16,7 +16,7 @@ async function addRequest(cakeData){
       throw new Error('Ошибка при удалении');
     }
     preloader.style.display = "none";
-    window.location.href = '/';
+    window.location.href = "/?auth=true";
   } catch (error) {
     preloader.style.display = "none";
     console.log(error);

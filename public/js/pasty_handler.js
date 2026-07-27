@@ -81,6 +81,7 @@ async function search(pattern) {
   const errorMessage = document.getElementById("error-message");
 
   try {
+    console.log(pattern);
     console.log(`/api/pastries/search?pattern=${encodeURIComponent(pattern)}`);
     const response = await fetch(`/api/pastries/search?pattern=${encodeURIComponent(pattern)}`);
     const result = await response.json();

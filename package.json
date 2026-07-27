@@ -18,7 +18,7 @@
     "migration:revert": "dotenv -e .env -- npm run typeorm -- migration:revert -d ./src/infrastructure/config/migration.config.ts",
     "migration:create": "dotenv -e .env -- npm run typeorm -- migration:create ./src/infrastructure/migrations/",
     "seed:create": "typeorm-extension seed:create",
-    "seed:run": "typeorm-extension seed:run",
+    "seed:run": "dotenv -e .env -- typeorm-extension seed:run -d ./src/infrastructure/config/migration.config.ts",
     "db:seed": "ts-node node_modules/typeorm-extension/dist/cli.js seed:run",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",

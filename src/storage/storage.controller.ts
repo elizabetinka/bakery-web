@@ -9,6 +9,7 @@ import {
 import { StorageService } from './storage.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as path from 'node:path';
+import { ApiExcludeEndpoint } from '@nestjs/swagger';
 
 @Controller('api/storage')
 export class StorageController {
@@ -16,6 +17,7 @@ export class StorageController {
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
+  @ApiExcludeEndpoint()
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
     const url = await this.storageService.uploadFile(file.path, file.filename);
     return {

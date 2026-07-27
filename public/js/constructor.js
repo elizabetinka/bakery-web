@@ -3,6 +3,7 @@ const form = document.getElementById("scheduleForm");
 const tableContainer = document.getElementById("tableContainer");
 
 form.addEventListener("submit", (event) => {
+    console.log("Form submitted");
     event.preventDefault(); 
 
     const partyType = document.getElementById("partyType").value;
@@ -10,6 +11,7 @@ form.addEventListener("submit", (event) => {
     const maxClasses = document.getElementById("maxNum").value;
     const language = document.getElementById("language").value;
 
+    console.log("Generating table with parameters:", partyType, maxClasses, money, language);
     generateTable(partyType, maxClasses,money, language);
 });
 
@@ -151,6 +153,8 @@ function generateTable(partyType, maxClasses, money,language) {
     cell.textContent = cupcakes_count+cakes_count;
     ro.appendChild(cell);
     table.appendChild(ro);
+
+    console.log("Table generated with total sum:", sum, "and total items:", cupcakes_count+cakes_count);
 
     tableContainer.appendChild(table);
 }

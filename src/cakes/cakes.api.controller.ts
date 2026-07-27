@@ -40,6 +40,7 @@ export class CakesApiController {
   @ApiResponse({
     status: 201,
     description: 'Торт создан',
+    type: () => Cake,
   })
   @ApiDefaultErrorResponses()
   @ApiBody({
@@ -53,6 +54,7 @@ export class CakesApiController {
       type: 'ADD',
       data: { name: createCakeDto.name },
     });
+    return result;
   }
 
   @CacheKey('cakes_list_api')
@@ -69,11 +71,6 @@ export class CakesApiController {
     type: () => PaginationResponceDtoCake,
   })
   @ApiDefaultErrorResponses()
-  @ApiQuery({
-    example: { page: 1, limit: 50 },
-    description: 'Пагинационный запрос',
-    type: () => PaginationRequestDto,
-  })
   async findAll(@Query() paginationDto: PaginationRequestDto) {
     const { data, links, totalPages } =
       await this.cakesService.findAll(paginationDto);
@@ -100,11 +97,6 @@ export class CakesApiController {
     type: () => [Cake],
   })
   @ApiDefaultErrorResponses()
-  @ApiQuery({
-    example: "кре",
-    description: 'Паттерн',
-    type: () => String,
-  })
   @Header('Content-Type', 'application/json')
   async findAllIncludeString(@Query('pattern') pattern: string) {
     const cakes = await this.cakesService.findAllIncludeString(pattern);
@@ -139,7 +131,7 @@ export class CakesApiController {
 
   @ApiOperation({ summary: 'Удаление торта' })
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Торт удален',
   })
   @ApiDefaultErrorResponses()

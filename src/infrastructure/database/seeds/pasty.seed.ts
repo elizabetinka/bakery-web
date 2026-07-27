@@ -1,45 +1,48 @@
-// import { Factory, Seeder } from 'typeorm-seeding';
-// import { Connection } from 'typeorm';
-//import { Cake } from '../../../cakes/entities/cake.entity';
-//
-// export default class CreateCakes implements Seeder {
-//   public async run(factory: Factory, connection: Connection): Promise<void> {
-//     await connection
-//       .createQueryBuilder()
-//       .insert()
-//       .into(Cake)
-//       .values([
-//         { name: 'Шоколадный торт', price: 1200 },
-//         { name: 'Клубничный торт', price: 1500 },
-//       ])
-//       .execute();
-//   }
-// }
-
+import { Seeder } from 'typeorm-extension';
 import { DataSource } from 'typeorm';
 import { Pastry } from '../../../pastries/entities/pastry.entity';
 
-export async function seedPastry(dataSource: DataSource): Promise<void> {
-  const repository = dataSource.getRepository(Pastry);
-  await repository.query('TRUNCATE TABLE "pastry" CASCADE;');
-  await repository.insert([
-    {
-      name: 'Тирамису',
-      description:
-        'Нежный кофейный десерт, состоящий из печенья савоярди, крема на основе маскарпоне и итальянского кофе.',
-      price: 225,
-      isAvailable: true,
-      image:
-        'https://s.iimg.su/s/19/omkbJ9QZv5zoALMXzSlakd4rMaJj7rQr7IgxdUOX.jpg',
-    },
-    {
-      name: 'Брауни',
-      description:
-        'Шоколадный бисквит с орехами и шоколадной начинкой. Подается с мороженым.',
-      price: 270,
-      isAvailable: true,
-      image:
-        'https://s.iimg.su/s/19/Ccblhr6MzNCxSCtKNMEECK4g5ywvAwkWKpmzgO4t.jpg',
-    },
-  ]);
+export default class PastrySeeder implements Seeder {
+  public async run(dataSource: DataSource): Promise<void> {
+    const repository = dataSource.getRepository(Pastry);
+    await repository.query('TRUNCATE TABLE "pastry" CASCADE;');
+    await repository.insert([
+      {
+        name: 'Тирамису',
+        description:
+          'Нежный кофейный десерт, состоящий из печенья савоярди, крема на основе маскарпоне и итальянского кофе.',
+        price: 225,
+        isAvailable: false,
+        image:
+          'https://s6.iimage.su/s/20/uCOFsc6xiQNj2ZkGZw7aiLgpHNE0KaNjjtczWXEy5.jpg',
+      },
+      {
+        name: 'Брауни',
+        description:
+          'Шоколадный бисквит с орехами и шоколадной начинкой. Подается с мороженым.',
+        price: 270,
+        isAvailable: true,
+        image:
+          'https://s6.iimage.su/s/20/uRdLVTYxacIZpn3QeIvn2ff2N3hXCWC5r5izzLJuh.jpg',
+      },
+      {
+        name: 'Дубайский шоколад',
+        description:
+          'Бельгийский шоколадный десерт с фисташкой и тестом катаифи.',
+        price: 5000,
+        isAvailable: true,
+        image:
+          'https://s6.iimage.su/s/20/ujFdfGTxKoR4jgzALSmb6QknVnHbAfj6AWZmQ28Fr.jpg',
+      },
+      {
+        name: 'Пасхальный кулич',
+        description:
+          'Кулич с изюмом и цукатами, украшенный глазурью и посыпкой. Традиционный пасхальный десерт.',
+        price: 270,
+        isAvailable: true,
+        image:
+          'https://s6.iimage.su/s/20/uAXgeegxOFoYXmmYMohCtVt25Woqz27L3RhzRlnC2.jpg',
+      },
+    ]);
+  }
 }

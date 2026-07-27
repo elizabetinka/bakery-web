@@ -26,10 +26,9 @@ function setupSSEConnection() {
    showNotification(data);
   };
 
-  eventSource.onerror = () => {
-    console.error('SSE connection error');
-    setTimeout(setupSSEConnection, 5000);
-  };
+  eventSource.onerror = (e) => {
+    console.log("SSE error", e);
+};
 }
 
 async function showNotification(data) {
@@ -58,7 +57,7 @@ async function showNotification(data) {
   notyf.open({
     type: type,
     message: message,
-    duration: 3000
+    duration: 10000
   });
 }
 

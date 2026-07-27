@@ -34,7 +34,7 @@ export class CreateCakeDto {
   @ApiProperty({
     type: () => String,
     example:
-      'https://s.iimg.su/s/19/7b2FdwRxSvnXGgzn2IG4XzU2gaSuUDCNQw4fBfIy.jpg',
+      'https://s6.iimage.su/s/20/uJ7fVi9xymBZFtKg10VFI7gme2UBANcRjGr0ZN8nc.jpg',
     description: 'Ссылка на картинку',
   })
   @IsString()

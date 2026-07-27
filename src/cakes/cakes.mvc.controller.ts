@@ -3,18 +3,22 @@ import {
   Get,
   Param,
   Inject,
-  Render, Res,
+  Render,
 } from '@nestjs/common';
 
 import { CakesService } from './cakes.service';
 import { CacheControl } from '../decorator/cache-control.decorator';
 import { CacheKey, CacheTTL } from '@nestjs/cache-manager';
+import { ApiExcludeController } from '@nestjs/swagger';
+import { AuthStateService } from '../auth/auth-state.service';
 
 @CacheControl(5)
+@ApiExcludeController()
 @Controller('cakes')
 export class CakesMvcController {
   constructor(
-    @Inject(CakesService) private readonly cakesService: CakesService
+    @Inject(CakesService) private readonly cakesService: CakesService,
+    private readonly authStateService: AuthStateService,
   ) {}
 
   @CacheKey('cake_add')
@@ -22,8 +26,8 @@ export class CakesMvcController {
   @Get('add')
   @Render('pages/cakes_adding')
   add() {
-    console.log("here")
     return {
+      user: this.authStateService.getUser(),
       scripts: ['add_handler'],
     };
   }
@@ -35,7 +39,8 @@ export class CakesMvcController {
   async edit(@Param('id') id: number) {
     const cake = await this.cakesService.findOne(+id);
     return {
-      cake: cake,
+      cake,
+      user: this.authStateService.getUser(),
       scripts: ['edit_handler'],
     };
   }
@@ -48,7 +53,8 @@ export class CakesMvcController {
     if (id) {
       const cake = await this.cakesService.findOne(+id);
       return {
-        cake: cake,
+        cake,
+        user: this.authStateService.getUser(),
         scripts: ['cake_item_loader'],
       };
     }

@@ -12,6 +12,12 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 @Injectable()
 export class TimeInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    const request = context.switchToHttp().getRequest();
+
+    if (request?.url === '/notifications') {
+        return next.handle();
+    }
+
     const start = process.hrtime.bigint();
 
     const isGraphQL = context.getType<string>() === 'graphql';

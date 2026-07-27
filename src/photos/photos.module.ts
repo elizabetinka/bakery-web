@@ -5,9 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Photo } from './entities/photo.entity';
 import { PhotosMvcController } from './photos.mvc.controller';
 import { PhotoResolver } from './photo.resolver';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Photo])],
+  imports: [TypeOrmModule.forFeature([Photo]), AuthModule],
   controllers: [PhotosApiController, PhotosMvcController],
   providers: [PhotosService, PhotoResolver],
 })

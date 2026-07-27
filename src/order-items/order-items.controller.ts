@@ -8,8 +8,9 @@ import { ApiDefaultErrorResponses } from '../decorator/swagger-default-responses
 import { PaginationResponceDtoOrderItem } from '../pagination-responce.dto';
 import { PaginationRequestDto } from '../pagination-request.dto';
 
-@ApiTags('api/order-items')
-@Controller('api/order-items')
+// @ApiTags('api/order-items')
+@ApiTags('Orders')
+@Controller('Order-items')
 export class OrderItemsController {
   constructor(private readonly orderItemsService: OrderItemsService) {}
 
@@ -18,6 +19,7 @@ export class OrderItemsController {
   @ApiResponse({
     status: 201,
     description: 'Элемент создан',
+    type: () => OrderItem,
   })
   @ApiDefaultErrorResponses()
   @ApiBody({
@@ -26,7 +28,7 @@ export class OrderItemsController {
   })
   @Post()
   async create(@Body() createOrderItemDto: CreateOrderItemDto) {
-    await this.orderItemsService.create(createOrderItemDto);
+    return await this.orderItemsService.create(createOrderItemDto);
   }
 
   @ApiOperation({ summary: 'Получение элементов заказов' })

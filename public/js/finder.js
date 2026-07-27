@@ -29,6 +29,8 @@ function renderCatalog(cakesToShow) {
     //   filteredCakes =cakes;
     // }
 
+    console.log(searchInput);
+
     let filteredCakes = await search(searchInput);
 
     console.log(searchInput);

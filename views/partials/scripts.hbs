@@ -2,7 +2,7 @@
 <script src="/js/loadStats.js" defer></script>
 <script src="/js/active.js" defer></script>
 <script src="/js/finder.js"></script>
-<script src="/js/event_handler.js"></script>
+<script src="/js/event_handler.js" defer></script>
 
 {{#each scripts}}
   {{#if (eq this 'cakes_loader')}}
@@ -36,6 +36,10 @@
 
   {{#if (eq this 'edit_handler')}}
     <script src="/js/edit_handler.js" defer></script>
+  {{/if}}
+
+  {{#if (eq this 'constructor_loader')}}
+    <script src="/js/constructor.js" defer></script>
   {{/if}}
 
 

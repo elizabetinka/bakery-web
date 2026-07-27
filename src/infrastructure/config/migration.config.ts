@@ -1,4 +1,5 @@
-import { DataSource } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
+import { SeederOptions } from 'typeorm-extension';
 import { parse } from 'pg-connection-string';
 import { ConfigService } from '@nestjs/config';
 
@@ -20,6 +21,7 @@ export default new DataSource({
   database: config.database ?? 'default_db',
   entities: ['src/**/*.entity.ts'],
   migrations: ['src/infrastructure/migrations/*.ts'],
+  seeds: ['src/infrastructure/database/seeds/**/*{.ts,.js}'],
   synchronize: false,
   ssl: true,
   extra: {
@@ -27,4 +29,4 @@ export default new DataSource({
       rejectUnauthorized: false,
     },
   },
-});
+} as DataSourceOptions & SeederOptions);

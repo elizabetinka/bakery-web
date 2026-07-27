@@ -27,26 +27,17 @@ export class UsersController {
   })
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
-    await this.usersService.create(createUserDto);
+    return await this.usersService.create(createUserDto);
   }
 
   @ApiOperation({ summary: 'Получение пользователей' })
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Пользователи получены',
     type: () => User,
   })
-  @ApiResponse({
-    status: 201,
-    description: 'Фотки получены',
-    type: () => PaginationResponceDtoUser,
-  })
   @ApiDefaultErrorResponses()
-  @ApiQuery({
-    example: { page: 1, limit: 50 },
-    description: 'Пагинационный запрос',
-    type: () => PaginationRequestDto,
-  })
+  @Get()
   async findAll(@Query() paginationDto: PaginationRequestDto) {
     const { data, links, totalPages } =
       await this.usersService.findAll(paginationDto);
@@ -64,7 +55,7 @@ export class UsersController {
 
   @ApiOperation({ summary: 'Получение пользователя' })
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Пользователь получен',
     type: () => User,
   })
@@ -77,13 +68,14 @@ export class UsersController {
   @ApiDefaultErrorResponses()
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    await this.usersService.findOne(+id);
+    return await this.usersService.findOne(+id);
   }
 
   @ApiOperation({ summary: 'Редиктирование пользователя' })
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Пользователь отредактирован',
+    type: () => User,
   })
   @ApiDefaultErrorResponses()
   @ApiBody({
@@ -98,12 +90,12 @@ export class UsersController {
   })
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    await this.usersService.update(+id, updateUserDto);
+    return await this.usersService.update(+id, updateUserDto);
   }
 
   @ApiOperation({ summary: 'Удаление пользователя' })
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Пользователь удален',
   })
   @ApiDefaultErrorResponses()

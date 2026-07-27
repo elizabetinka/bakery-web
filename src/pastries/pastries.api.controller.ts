@@ -19,6 +19,7 @@ import { ApiDefaultErrorResponses } from '../decorator/swagger-default-responses
 import { PaginationResponceDtoCake, PaginationResponceDtoPastry } from '../pagination-responce.dto';
 import { CacheControl } from '../decorator/cache-control.decorator';
 import { CacheTTL } from '@nestjs/cache-manager';
+import { Pastry } from './entities/pastry.entity';
 
 @ApiTags('api/pastries')
 @Controller('api/pastries')
@@ -31,6 +32,7 @@ export class PastriesApiController {
   @ApiResponse({
     status: 201,
     description: 'Пирожное создан',
+    type: () => Pastry,
   })
   @ApiDefaultErrorResponses()
   @ApiBody({
@@ -39,24 +41,21 @@ export class PastriesApiController {
   })
   @Post()
   async create(@Body() createPastryDto: CreatePastryDto) {
-    await this.pastriesService.create(createPastryDto);
+    return await this.pastriesService.create(createPastryDto);
   }
 
-  @Post('search')
+  @Get('search')
   @ApiOperation({ summary: 'Получение пирожных в которых есть строка' })
   @ApiResponse({
     status: 200,
     description: 'Пирожные получены',
-    type: () => PaginationResponceDtoCake,
+    type: () => [Pastry],
   })
   @ApiDefaultErrorResponses()
-  @ApiQuery({
-    example: "кре",
-    description: 'Паттерн',
-    type: () => String,
-  })
-  async findAllIncludeString(@Body() pattern: string) {
-    return await this.pastriesService.findAllIncludeString(pattern);
+  @Header('Content-Type', 'application/json')
+  async findAllIncludeString(@Query('pattern') pattern: string) {
+    const cakes = await this.pastriesService.findAllIncludeString(pattern);
+    return { data: cakes };
   }
 
 
@@ -70,11 +69,6 @@ export class PastriesApiController {
     type: () => PaginationResponceDtoPastry,
   })
   @ApiDefaultErrorResponses()
-  @ApiQuery({
-    example: { page: 1, limit: 50 },
-    description: 'Пагинационный запрос',
-    type: () => PaginationRequestDto,
-  })
   async findAll(@Query() paginationDto: PaginationRequestDto) {
     const { data, links, totalPages } =
       await this.pastriesService.findAll(paginationDto);
@@ -94,6 +88,7 @@ export class PastriesApiController {
   @ApiResponse({
     status: 201,
     description: 'Пирожное отредактирован',
+    type: () => Pastry,
   })
   @ApiDefaultErrorResponses()
   @ApiBody({
@@ -108,7 +103,7 @@ export class PastriesApiController {
   })
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updatePastryDto: UpdatePastryDto) {
-    await this.pastriesService.update(+id, updatePastryDto);
+    return await this.pastriesService.update(+id, updatePastryDto);
   }
 
   @ApiOperation({ summary: 'Удаление пирожного' })

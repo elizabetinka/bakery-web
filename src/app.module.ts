@@ -25,6 +25,7 @@ import {
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TimeInterceptor } from './interceptors/time.interceptor';
 import { StorageModule } from './storage/storage.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -67,6 +68,7 @@ import { StorageModule } from './storage/storage.module';
     OrderItemsModule,
     PhotosModule,
     StorageModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService,

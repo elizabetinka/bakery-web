@@ -35,6 +35,7 @@ export class OrderItemsService {
       throw new NotFoundException(`Item with this ID not found`);
     }
 
+
     const order = await this.ordersService.findOne(createOrderItemDto.orderId);
     if (!order) {
       throw new NotFoundException(
@@ -58,9 +59,11 @@ export class OrderItemsService {
         itemPrice: item.price,
       };
     }
-
     const real_order = this.orderItemsRepository.create(orderItem);
-    return await this.orderItemsRepository.save(real_order);
+    const savedOrderItem = await this.orderItemsRepository.save(real_order);
+    console.log("create 6")
+    console.dir(savedOrderItem, { depth: null });
+    return savedOrderItem;
   }
 
 
