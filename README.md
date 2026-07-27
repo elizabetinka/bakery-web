@@ -27,6 +27,7 @@ Bakery Web — это клиент-серверное веб-приложени�
 - TypeScript
 - TypeORM
 - PostgreSQL
+- Handlebars
 
 ## Хранение данных
 
