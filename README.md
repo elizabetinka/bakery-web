@@ -1,9 +1,53 @@
-## Сайт для индивидуального кондитера и его пекарни
+<div align="center" style="margin-bottom: 28px;">
+  <img src="public/favicon.ico" width="60" height="50" style="border-radius: 15px; vertical-align: middle; margin-right: 16px;">
+  <h1 style="margin: 0; display: inline-block; vertical-align: middle;">Веб-приложение для индивидуального кондитера и его пекарни </h1>
+</div>
 
-Автор: Кравченкова Елизавета 
+Bakery Web — это клиент-серверное веб-приложение, разработанное для управления каталогом тортов и пирожных.
 
-Ссылка: https://bakery-web-ftzw.onrender.com
+Ссылка: https://bakery-web-my-repo.onrender.com/
 
+## Основные возможности
+
+- 🧁 Просмотр каталога тортов и пирожных с пагинацией;
+- 🥨 Интерфейс для поиска тортов по названию;
+- 🍰 Интерфейс для  создания, редактирование и удаление товаров;
+- 🍧 REST API ([swagger](https://bakery-web-my-repo.onrender.com/api/docs))
+- 🍩 GraphQL ([playground](https://bakery-web-my-repo.onrender.com/graphql))
+- 🥨 Загрузка файлов при создании item
+- 🥐 Кеширование с помощью заголовка Cache-Control
+- 🍦 Измерение время обработки запроса
+- 🍭 Уведомление об изменении данных в режиме реального времени с использованием Server-Sent Events (SSE)
+- 🥞 Добавлен механизм работы с миграциями и загрузкой тестовых данных
+
+## Технологии
+
+- NestJS
+- TypeScript
+- TypeORM
+- PostgreSQL
+
+## Хранение данных
+
+Хостинг сервиса: https://render.com
+
+Хостинг базы даных: https://aiven.io
+
+Хостинг для картинок: https://iimg.su
+
+S3 хранилище: https://yandex.cloud/
+
+## Инструкция для локального запуска:
+
+```bash
+npm install; npm run build
+
+# Запуск миграций
+npm run migration:run; 
+
+# Заполнение тестовыми данными
+npm run seed:run
+```
 
 ## Структура базы данных
 
@@ -93,3 +137,5 @@ items : One-to-Many → OrderItem
 7. Enum Role 
    CUSTOMER - покупатель
    ADMIN - aдмин
+
+
